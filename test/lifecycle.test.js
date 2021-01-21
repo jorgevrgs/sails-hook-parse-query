@@ -37,6 +37,7 @@ before(function (done) {
         'sails-hook-parse-query': require('../'),
         orm: require('sails-hook-orm'),
         i18n: false,
+        policies: false,
         pubsub: false,
         session: false,
         views: false,
