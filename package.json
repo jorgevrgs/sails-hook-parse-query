@@ -1,0 +1,42 @@
+{
+  "name": "npm",
+  "version": "1.0.0",
+  "description": "Hook to parse query for Sails v1.0",
+  "main": "lib/sails-hook-parse-query.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {
+    "@sailshq/lodash": "^3.10.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^7.18.0",
+    "mocha": "^8.2.1",
+    "sails": "^1.4.0",
+    "sails-hook-orm": "^3.0.1",
+    "supertest": "^6.1.1"
+  },
+  "scripts": {
+    "test": "npm run lint && npm run custom-tests",
+    "custom-tests": "node ./node_modules/mocha/bin/mocha && echo \"Custom tests all passed.\" && echo",
+    "lint": "node ./node_modules/eslint/bin/eslint . --max-warnings=0 && echo '✔  Your code looks good.'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jorgevrgs/sails-hook-parse-query.git"
+  },
+  "keywords": [
+    "sails",
+    "hooks",
+    "sails-hook",
+    "sails-helpers"
+  ],
+  "author": "Jorge Vargas <jorgevargasla@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jorgevrgs/sails-hook-parse-query/issues"
+  },
+  "homepage": "https://github.com/jorgevrgs/sails-hook-parse-query#readme"
+}
