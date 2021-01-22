@@ -31,7 +31,7 @@ before(function (done) {
         _: require('@sailshq/lodash'),
         sails: true,
         async: false,
-        models: false,
+        models: true,
       },
       hooks: Object.assign({}, configOverrides.hooks, {
         'sails-hook-parse-query': require('../'),
@@ -68,7 +68,39 @@ before(function (done) {
 
         global.app = request(sails.hooks.http.app);
 
-        return done();
+        let users = [];
+        const faker = require('faker');
+        for (let i = 0; i < 10; i++) {
+          const user = {
+            emailAddress: faker.internet.exampleEmail(),
+            fullName: faker.name.findName(),
+            password: 'abc123',
+          };
+
+          users.push(user);
+        }
+
+        User.createEach(users)
+          .meta({ fetch: true })
+          .then((users) => {
+            let pets = [];
+            for (let i = 0; i < 10; i++) {
+              const user = faker.random.objectElement(users);
+              const pet = {
+                name: faker.commerce.productName(),
+                user: user.id,
+              };
+
+              pets.push(pet);
+            }
+
+            Pet.createEach(pets)
+              .then(() => {
+                return done();
+              })
+              .catch((err) => done(err));
+          })
+          .catch((err) => done(err));
       } catch (err) {
         return done(err);
       }

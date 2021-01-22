@@ -29,6 +29,7 @@
     "Promise": true,
     "sails": true,
     "User": true,
+    "Pet": true,
     "_": true
   },
 
