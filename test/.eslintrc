@@ -20,7 +20,9 @@
   "globals": {
     "assert": true,
     "sails": true,
-    "app": true
+    "app": true,
+    "User": true,
+    "Pet": true
     // ^^ Any globals exposed in test suites for convenience go here.
   }
 

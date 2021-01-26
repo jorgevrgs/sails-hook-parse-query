@@ -4,12 +4,12 @@ var user;
 describe('Add Action', function () {
   before(async function () {
     // Create an orphan child
-    pet = await Pet.create({ name: 'Pet Without Parent' });
-    user = await user.create({
+    pet = await Pet.create({ name: 'Pet Without Parent' }).fetch();
+    user = await User.create({
       fullName: 'Parent Without Pet',
       emailAddress: 'no-pet@user.com',
       password: 'abc123',
-    });
+    }).fetch();
   });
 
   after(async function () {
@@ -18,7 +18,7 @@ describe('Add Action', function () {
     await User.destroyOne({ id: user.id });
   });
 
-  it('Should add a pet to the user', async function () {
+  it('Should add a child to the parent', async function () {
     const filter = sails.helpers.parse.query(
       'user',
       'add',
@@ -31,6 +31,7 @@ describe('Add Action', function () {
     );
 
     const res = await sails.helpers.actions.add(filter);
-    assert.isDefined(res);
+
+    assert.equal(res.pets[0].id, pet.id);
   });
 });

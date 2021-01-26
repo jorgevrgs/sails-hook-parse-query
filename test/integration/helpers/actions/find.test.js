@@ -18,7 +18,7 @@ describe('Find Action', function () {
   });
 
   it('Should be equal with "perPage" and "limit" query', async function () {
-    const filter = await sails.helpers.parse.query('user', 'find', {
+    const filter = sails.helpers.parse.query('user', 'find', {
       limit: 5,
     });
 
