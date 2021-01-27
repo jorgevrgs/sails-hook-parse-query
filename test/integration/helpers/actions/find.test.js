@@ -1,4 +1,4 @@
-describe('Find Action', function () {
+describe('Actions - Find', function () {
   it('Should return ["list", "count"] array', async function () {
     const filter = sails.helpers.parse.query('user', 'find');
 

@@ -1,7 +1,7 @@
 var pet;
 var user;
 
-describe('Add Action', function () {
+describe('Actions - Add', function () {
   before(async function () {
     // Create an orphan child
     pet = await Pet.create({ name: 'Pet Without Parent' }).fetch();

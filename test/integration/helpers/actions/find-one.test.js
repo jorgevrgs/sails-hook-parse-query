@@ -1,7 +1,7 @@
 var pets;
 var pet;
 
-describe('Find One Action', function () {
+describe('Actions - Find One', function () {
   before(async function () {
     pets = await Pet.find();
   });

@@ -1,7 +1,7 @@
 // var user;
 const faker = require('faker');
 
-describe('Create Action', function () {
+describe('Actions - Create', function () {
   it('Should create and fetch with params', async function () {
     const filter = sails.helpers.parse.query(
       'user',

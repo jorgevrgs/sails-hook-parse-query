@@ -1,4 +1,4 @@
-describe('Where', function () {
+describe('Parse - Where', function () {
   it('Should return a value for where string', function () {
     const where = sails.helpers.parse.where({
       where: '{"name": "John Doe"}',

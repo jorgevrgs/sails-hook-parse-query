@@ -1,4 +1,4 @@
-describe('Add', function () {
+describe('Filters - Add', function () {
   it('Should return default object', function () {
     const add = sails.helpers.filters.add({
       id: 1,

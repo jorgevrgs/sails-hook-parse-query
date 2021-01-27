@@ -1,4 +1,4 @@
-describe('Limit', function () {
+describe('Parse - Limit', function () {
   it('Should return default limit if empty', function () {
     const limit = sails.helpers.parse.limit({});
 

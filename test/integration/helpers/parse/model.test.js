@@ -1,4 +1,4 @@
-describe('Model', function () {
+describe('Parse - Model', function () {
   it('Should return a model object', function () {
     const model = sails.helpers.parse.model('user');
 

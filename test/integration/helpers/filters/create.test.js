@@ -1,4 +1,4 @@
-describe('Create', function () {
+describe('Filters - Create', function () {
   it('Should return default object', function () {
     const add = sails.helpers.filters.create({
       firstName: 'John Doe',

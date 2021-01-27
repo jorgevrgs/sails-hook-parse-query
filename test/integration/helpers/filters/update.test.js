@@ -1,4 +1,4 @@
-describe('Update', function () {
+describe('Filters - Update', function () {
   it('Should return an object with all the required params', function () {
     const update = sails.helpers.filters.update('user', {
       id: 1,

@@ -1,4 +1,4 @@
-describe('Populate', function () {
+describe('Parse - Populate', function () {
   it('Should return {foo: {}, bar: {}} for populate string', function () {
     const populate = sails.helpers.parse.populate({ populate: 'foo,bar' });
 

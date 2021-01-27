@@ -1,4 +1,4 @@
-describe('Destroy Action', function () {
+describe('Actions - Destroy', function () {
   it('Should delete a record', async function () {
     const pet = await Pet.create({
       name: 'To Delete',

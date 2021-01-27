@@ -1,4 +1,4 @@
-describe('Remove', function () {
+describe('Filters - Remove', function () {
   it('Should return an object with all the required params', function () {
     const remove = sails.helpers.filters.remove({
       id: 1,

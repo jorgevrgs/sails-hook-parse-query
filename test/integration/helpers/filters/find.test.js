@@ -1,4 +1,4 @@
-describe('Find', function () {
+describe('Filters - Find', function () {
   it('Should return an object without query', function () {
     const find = sails.helpers.filters.find('user', {});
 

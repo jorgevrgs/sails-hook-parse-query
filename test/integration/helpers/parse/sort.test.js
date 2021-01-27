@@ -1,4 +1,4 @@
-describe('Sort', function () {
+describe('Parse - Sort', function () {
   it('Should return a undefined for empty', function () {
     const sort = sails.helpers.parse.sort({});
 
