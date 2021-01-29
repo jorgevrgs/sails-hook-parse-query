@@ -2,6 +2,94 @@
 
 A helper to parse request queries and params
 
+## How to use
+
+- Parse a filter from query and params (inputs).
+- Process an action with the processed filter.
+
+### Filter
+
+Action:
+
+- 'add',
+- 'create'
+- 'destroy'
+- 'find'
+- 'findOne'
+- 'populate'
+- 'remove'
+- 'replace'
+- 'update'
+
+```js
+// api/controllers/some/action.js
+...
+fn: function(inputs, exits, ctx) {
+  const model = 'user';
+  const action = 'find';
+  const filter = sails.helpers.parse.query(model, action, ctx.req.query, inputs);
+  // ...
+}
+```
+
+### Action
+
+```js
+// api/controllers/some/action.js
+...
+fn: function(inputs, exits, ctx) {
+  const model = 'user';
+  const action = 'find';
+  const filter = sails.helpers.parse.query(model, action, ctx.req.query, inputs);
+  const res = sails.helpers.actions[action](filter);
+
+  return ctx.res.ok({list: res.list, count: res.count});
+}
+```
+
+### Error Handler
+
+Use intercept/tolerate:
+
+```js
+// api/controllers/some/action.js
+...
+fn: function(inputs, exits, ctx) {
+  const model = 'user';
+  const action = 'find';
+  const filter = sails.helpers.parse.query(model, action, ctx.req.query, inputs)
+    .intercept('badRequest', 'badRequest')
+    .intercept('notFound', 'notFound');
+
+  const res = sails.helpers.actions[action](filter)
+    .intercept('notFound', 'notFound');
+
+  return ctx.res.ok({list: res.list, count: res.count});
+}
+```
+
+or use try/catch:
+
+```js
+// api/controllers/some/action.js
+...
+fn: function(inputs, exits, ctx) {
+  const model = 'user';
+  const action = 'find';
+
+  try {
+    const filter = sails.helpers.parse.query(model, action, ctx.req.query, inputs);
+
+    const res = sails.helpers.actions[action](filter);
+
+    return ctx.res.ok({list: res.list, count: res.count});
+  } catch (err) {
+    sails.log.error(err);
+    throw 'badRequest';
+  }
+}
+```
+
 ## Add
 
 ### Request
@@ -39,13 +127,11 @@ module.exports = {
     }
   },
   fn: function(inputs, exits, ctx) {
-    const model = 'user';
-    const query = ;
-    const filter = sails.helpers.parse.query(model, 'add', {}, inputs);
+    const filter = sails.helpers.parse.query('user', 'add', {}, inputs);
       .intercept('badRequest', 'badRequest')
       .intercept('notFound', 'notFound');
 
-    const updatedUser = await sails.helpers.actions.find(filter)
+    const updatedUser = await sails.helpers.actions.add(filter)
       .intercept('notFound', 'notFound');
 
     return ctx.res.ok(updatedUser);
@@ -83,13 +169,12 @@ module.exports = {
     }
   },
   fn: function(inputs, exits, ctx) {
-    const model = 'product';
     const query = {};
-    const filter = sails.helpers.parse.query(model, 'add', {}, inputs);
+    const filter = sails.helpers.parse.query('product', 'add', {}, inputs);
       .intercept('badRequest', 'badRequest')
       .intercept('notFound', 'notFound');
 
-    const res = await sails.helpers.actions.add(filter)
+    const res = await sails.helpers.actions.create(filter)
       .intercept('notFound', 'notFound');
 
     return ctx.res.ok(res);
