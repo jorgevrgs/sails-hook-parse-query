@@ -41,7 +41,7 @@ module.exports = {
   fn: function(inputs, exits, ctx) {
     const model = 'user';
     const query = ;
-    const filter = await sails.helpers.parse.query(model, 'add', {}, inputs);
+    const filter = sails.helpers.parse.query(model, 'add', {}, inputs);
       .intercept('badRequest', 'badRequest')
       .intercept('notFound', 'notFound');
 
@@ -85,7 +85,7 @@ module.exports = {
   fn: function(inputs, exits, ctx) {
     const model = 'product';
     const query = {};
-    const filter = await sails.helpers.parse.query(model, 'add', {}, inputs);
+    const filter = sails.helpers.parse.query(model, 'add', {}, inputs);
       .intercept('badRequest', 'badRequest')
       .intercept('notFound', 'notFound');
 
@@ -113,7 +113,7 @@ module.exports = {
   fn: function(inputs, exits, ctx) {
     const model = 'product';
     const query = ctx.req.query;
-    const filter = await sails.helpers.parse.query(model, 'find', query);
+    const filter = sails.helpers.parse.query(model, 'find', query);
       .intercept('badRequest', 'badRequest')
       .intercept('notFound', 'notFound');
 
