@@ -1,12 +1,12 @@
 # sails-hook-parse-query
 
-A helper to parse request queries
+A helper to parse request queries and params
 
 ## Add
 
 ### Request
 
-Route: `PUT /api/v1/:model/:id/:association/:fk`
+Route: `PUT /api/v1/users/:id/:association/:fk`
 
 ```
 PUT /api/v1/products/1/accessories
@@ -14,7 +14,7 @@ Autorization: Bearer {{jwtToken}}
 
 {
   "id": 1,
-  "association": 'accessories',
+  "association": 'pets',
   "fk": 2,
 }
 ```
@@ -39,19 +39,16 @@ module.exports = {
     }
   },
   fn: function(inputs, exits, ctx) {
-    const model = 'product';
-    const query = {};
+    const model = 'user';
+    const query = ;
     const filter = await sails.helpers.parse.query(model, 'add', {}, inputs);
       .intercept('badRequest', 'badRequest')
       .intercept('notFound', 'notFound');
 
-    const { list, count } = await sails.helpers.actions.find(filter)
+    const updatedUser = await sails.helpers.actions.find(filter)
       .intercept('notFound', 'notFound');
 
-    // ctx.res.set('X-Total-Count', count)
-    // retrun ctx.res.ok(list);
-
-    return ctx.res.ok({list, count});
+    return ctx.res.ok(updatedUser);
   }
 };
 ```
@@ -123,10 +120,12 @@ module.exports = {
     const { list, count } = await sails.helpers.actions.find(filter)
       .intercept('notFound', 'notFound');
 
+    // Response with count in header
     // ctx.res.set('X-Total-Count', count)
     // retrun ctx.res.ok(list);
 
-    return ctx.res.ok({list, count});
+    // Response with a nested object
+    return ctx.res.ok({data: list, count});
   }
 };
 ```
