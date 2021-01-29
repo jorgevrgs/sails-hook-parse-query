@@ -13,7 +13,7 @@ describe('Parse - Where', function () {
         where: '{"name": "John Doe"',
       });
     } catch (error) {
-      assert.equal(error.code, 'cannotParseQuery');
+      assert.equal(error.code, 'badRequest');
     }
   });
 });

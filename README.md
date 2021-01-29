@@ -42,11 +42,11 @@ module.exports = {
     const model = 'product';
     const query = {};
     const filter = await sails.helpers.parse.query(model, 'add', {}, inputs);
-      .intercept('cannotParseQuery', 'badRequest')
-      .intercept('modelNotFound', 'notFound');
+      .intercept('badRequest', 'badRequest')
+      .intercept('notFound', 'notFound');
 
     const { list, count } = await sails.helpers.actions.find(filter)
-      .intercept('modelNotFound', 'notFound');
+      .intercept('notFound', 'notFound');
 
     // ctx.res.set('X-Total-Count', count)
     // retrun ctx.res.ok(list);
@@ -89,11 +89,11 @@ module.exports = {
     const model = 'product';
     const query = {};
     const filter = await sails.helpers.parse.query(model, 'add', {}, inputs);
-      .intercept('cannotParseQuery', 'badRequest')
-      .intercept('modelNotFound', 'notFound');
+      .intercept('badRequest', 'badRequest')
+      .intercept('notFound', 'notFound');
 
     const res = await sails.helpers.actions.add(filter)
-      .intercept('modelNotFound', 'notFound');
+      .intercept('notFound', 'notFound');
 
     return ctx.res.ok(res);
   }
@@ -117,11 +117,11 @@ module.exports = {
     const model = 'product';
     const query = ctx.req.query;
     const filter = await sails.helpers.parse.query(model, 'find', query);
-      .intercept('cannotParseQuery', 'badRequest')
-      .intercept('modelNotFound', 'notFound');
+      .intercept('badRequest', 'badRequest')
+      .intercept('notFound', 'notFound');
 
     const { list, count } = await sails.helpers.actions.find(filter)
-      .intercept('modelNotFound', 'notFound');
+      .intercept('notFound', 'notFound');
 
     // ctx.res.set('X-Total-Count', count)
     // retrun ctx.res.ok(list);

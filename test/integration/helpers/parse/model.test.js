@@ -9,7 +9,7 @@ describe('Parse - Model', function () {
     try {
       sails.helpers.parse.model('xyz');
     } catch (error) {
-      assert.equal(error.code, 'modelNotFound');
+      assert.equal(error.code, 'notFound');
     }
   });
 });
