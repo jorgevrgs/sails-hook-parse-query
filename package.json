@@ -1,6 +1,6 @@
 {
-  "name": "npm",
-  "version": "1.0.0",
+  "name": "@jorgevrgs/sails-hook-parse-query",
+  "version": "0.0.1",
   "description": "Hook to parse query for Sails v1.0",
   "main": "lib/sails-hook-parse-query.js",
   "directories": {
@@ -39,5 +39,8 @@
   "bugs": {
     "url": "https://github.com/jorgevrgs/sails-hook-parse-query/issues"
   },
-  "homepage": "https://github.com/jorgevrgs/sails-hook-parse-query#readme"
+  "homepage": "https://github.com/jorgevrgs/sails-hook-parse-query#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }
