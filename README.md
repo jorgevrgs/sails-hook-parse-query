@@ -24,10 +24,10 @@ Action:
 ```js
 // api/controllers/some/action.js
 ...
-fn: function(inputs, exits, ctx) {
+fn: function(inputs, exits) {
   const model = 'user';
   const action = 'find';
-  const filter = sails.helpers.parse.query(model, action, ctx.req.query, inputs);
+  const filter = sails.helpers.parse.query(model, action, this.req.query, inputs);
   // ...
 }
 ```
@@ -37,13 +37,13 @@ fn: function(inputs, exits, ctx) {
 ```js
 // api/controllers/some/action.js
 ...
-fn: function(inputs, exits, ctx) {
+fn: function(inputs, exits) {
   const model = 'user';
   const action = 'find';
-  const filter = sails.helpers.parse.query(model, action, ctx.req.query, inputs);
+  const filter = sails.helpers.parse.query(model, action, this.req.query, inputs);
   const res = sails.helpers.actions[action](filter);
 
-  return ctx.res.ok({list: res.list, count: res.count});
+  return this.res.ok({list: res.list, count: res.count});
 }
 ```
 
@@ -54,17 +54,17 @@ Use intercept/tolerate:
 ```js
 // api/controllers/some/action.js
 ...
-fn: function(inputs, exits, ctx) {
+fn: function(inputs, exits) {
   const model = 'user';
   const action = 'find';
-  const filter = sails.helpers.parse.query(model, action, ctx.req.query, inputs)
+  const filter = sails.helpers.parse.query(model, action, this.req.query, inputs)
     .intercept('badRequest', 'badRequest')
     .intercept('notFound', 'notFound');
 
   const res = sails.helpers.actions[action](filter)
     .intercept('notFound', 'notFound');
 
-  return ctx.res.ok({list: res.list, count: res.count});
+  return this.res.ok({list: res.list, count: res.count});
 }
 ```
 
@@ -73,16 +73,16 @@ or use try/catch:
 ```js
 // api/controllers/some/action.js
 ...
-fn: function(inputs, exits, ctx) {
+fn: function(inputs, exits) {
   const model = 'user';
   const action = 'find';
 
   try {
-    const filter = sails.helpers.parse.query(model, action, ctx.req.query, inputs);
+    const filter = sails.helpers.parse.query(model, action, this.req.query, inputs);
 
     const res = sails.helpers.actions[action](filter);
 
-    return ctx.res.ok({list: res.list, count: res.count});
+    return this.res.ok({list: res.list, count: res.count});
   } catch (err) {
     sails.log.error(err);
     throw 'badRequest';
@@ -126,7 +126,7 @@ module.exports = {
       required: true,
     }
   },
-  fn: function(inputs, exits, ctx) {
+  fn: function(inputs, exits) {
     const filter = sails.helpers.parse.query('user', 'add', {}, inputs);
       .intercept('badRequest', 'badRequest')
       .intercept('notFound', 'notFound');
@@ -134,7 +134,7 @@ module.exports = {
     const updatedUser = await sails.helpers.actions.add(filter)
       .intercept('notFound', 'notFound');
 
-    return ctx.res.ok(updatedUser);
+    return this.res.ok(updatedUser);
   }
 };
 ```
@@ -168,7 +168,7 @@ module.exports = {
       required: true,
     }
   },
-  fn: function(inputs, exits, ctx) {
+  fn: function(inputs, exits) {
     const query = {};
     const filter = sails.helpers.parse.query('product', 'add', {}, inputs);
       .intercept('badRequest', 'badRequest')
@@ -177,7 +177,7 @@ module.exports = {
     const res = await sails.helpers.actions.create(filter)
       .intercept('notFound', 'notFound');
 
-    return ctx.res.ok(res);
+    return this.res.ok(res);
   }
 };
 ```
@@ -195,9 +195,9 @@ GET /api/v1/products?page=2&perPage=10
 ```js
 module.exports = {
   ...
-  fn: function(inputs, exits, ctx) {
+  fn: function(inputs, exits) {
     const model = 'product';
-    const query = ctx.req.query;
+    const query = this.req.query;
     const filter = sails.helpers.parse.query(model, 'find', query);
       .intercept('badRequest', 'badRequest')
       .intercept('notFound', 'notFound');
@@ -206,11 +206,11 @@ module.exports = {
       .intercept('notFound', 'notFound');
 
     // Response with count in header
-    // ctx.res.set('X-Total-Count', count)
-    // retrun ctx.res.ok(list);
+    // this.res.set('X-Total-Count', count)
+    // retrun this.res.ok(list);
 
     // Response with a nested object
-    return ctx.res.ok({data: list, count});
+    return this.res.ok({data: list, count});
   }
 };
 ```
