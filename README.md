@@ -1,6 +1,6 @@
-# sails-hook-parse-query
+# sails-hook-parsequery
 
-A helper to parse request queries and params
+A helper to parse request queries and params based on Sails Blueprints actions.
 
 ## How to use
 
